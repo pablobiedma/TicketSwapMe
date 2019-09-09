@@ -3,7 +3,6 @@ from selenium.webdriver.common.keys import Keys
 import json
 import time
 import requests
-import getpass
 import tkinter as tk
 from tkinter import simpledialog
 import webbrowser
@@ -45,25 +44,8 @@ class TicketSwapMe:
 
         user_input.send_keys(username)
         pass_input.send_keys(password)
-        time.sleep(1)
-        if driver.find_element_by_id('loginbutton'):
-            send_login = driver.find_element_by_id('loginbutton')
-
-        elif driver.find_element_by_id('u_0_0'):
-            send_login = driver.find_element_by_id('u_0_0')
-
-            send_login.click()
-            time.sleep(1)
-
-        try:
-            confirm = driver.find_element_by_name('__CONFIRM__')
-
-            confirm.click()
-
-            time.sleep(1)
-        except Exception:
-            pass
-
+        pass_input.send_keys(Keys.RETURN)
+        time.sleep(3)
         driver.switch_to.window(driver.window_handles[0])
 
         time.sleep(3)
@@ -72,13 +54,9 @@ class TicketSwapMe:
 
         driver.quit()
 
-        if 'token' not in self.cookies:
-            print('username or password is invalid!')
-            self.login()
-
-    def __handle_cookies(self, cookieList):
+    def __handle_cookies(self, cookie_list):
         cookies = {}
-        for cookie in cookieList:
+        for cookie in cookie_list:
             cookies[cookie['name']] = cookie['value']
         return cookies
 
@@ -91,7 +69,7 @@ class TicketSwapMe:
             if data is not False:
                 self.reserve_ticket(data)
                 self.has_tickets = True
-                wd.open(HOST + '/cart', new=2)
+                webbrowser.open(HOST + '/cart', new=2)
             time.sleep(0.5)
 
     def get_ticket(self, event_url):
