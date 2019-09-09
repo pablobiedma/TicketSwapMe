@@ -162,5 +162,7 @@ class TicketSwapMe:
 
 
 if __name__ == "__main__":
+    ROOT = tk.Tk()
+    ROOT.withdraw()
     t = TicketSwapMe()
     t.start()
