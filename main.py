@@ -36,3 +36,39 @@ class TicketSwapMe:
 
         user_input.send_keys(username)
         pass_input.send_keys(password)
+        if driver.find_element_by_id('loginbutton'):
+            send_login = driver.find_element_by_id('loginbutton')
+
+        elif driver.find_element_by_id('u_0_0'):
+            send_login = driver.find_element_by_id('u_0_0')
+
+            send_login.click()
+            time.sleep(1)
+
+        try:
+            confirm = driver.find_element_by_name('__CONFIRM__')
+
+            confirm.click()
+
+            time.sleep(1)
+        except Exception:
+            pass
+
+        driver.switch_to_window(driver.window_handles[0])
+
+        time.sleep(3)
+
+        self.cookies = self.__handle_cookies(driver.get_cookies())
+
+        driver.quit()
+
+        if 'token' not in self.cookies:
+            print('username or password is invalid!')
+            self.login()
+
+    def __handle_cookies(self, cookieList):
+        cookies = {}
+        for cookie in cookieList:
+            cookies[cookie['name']] = cookie['value']
+        return cookies
+
