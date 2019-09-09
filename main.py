@@ -4,6 +4,8 @@ import json
 import time
 import requests
 import getpass
+import tkinter as tk
+from tkinter import simpledialog
 import webbrowser
 
 try:
@@ -20,8 +22,11 @@ class TicketSwapMe:
         self.has_tickets = False
 
     def login(self):
-        username = input("Facebook username:  ")
-        password = getpass.getpass("Facebook password:  ")
+        username = simpledialog.askstring(title="Username",
+                                          prompt="Please enter your instagram username: ")
+        password = simpledialog.askstring(title="Password",
+                                          prompt="Please enter your password: ",
+                                          show="*")
         driver = wd.Firefox()
         driver.get(HOST)
         login_button = driver.find_element_by_class_name(
@@ -76,7 +81,8 @@ class TicketSwapMe:
         return cookies
 
     def start(self):
-        event_url = input("Type here the event url")  # maybe hardcode it for more efficiency
+        event_url = simpledialog.askstring(title="Event URL",
+                                           prompt="Please enter the event URL: ")  # maybe hardcode it for more efficiency
         while self.has_tickets is False:
             print('Checking for tickets')
             data = self.get_ticket(event_url)
