@@ -13,22 +13,21 @@ try:
 except ImportError:
     from bs4 import BeautifulSoup
 
-HOST = "https://www.ticketswap.nl"
+HOST = "https://www.ticketswap.com"
 
 
 class TicketSwapMe:
-    def __index__(self):
+    def __init__(self, username, password):
         self.login()
+        self.username = username
+        self.password = password
+        self.driver = wd.Firefox()
         self.has_tickets = False
 
     def login(self):
-        username = simpledialog.askstring(title="Username",
-                                          prompt="Please enter your instagram username: ")
-        password = simpledialog.askstring(title="Password",
-                                          prompt="Please enter your password: ",
-                                          show="*")
-        driver = wd.Firefox()
-        driver.get(HOST)
+
+        driver = self.driver
+        driver.get("https://www.ticketswap.com")
         login_button = driver.find_element_by_class_name(
             "css-1ia6hlk e1oaf4hi6")  # make sure that class name is still the same
         login_button.click()
@@ -42,8 +41,8 @@ class TicketSwapMe:
         user_input = driver.find_element_by_id('email')
         pass_input = driver.find_element_by_id('pass')
 
-        user_input.send_keys(username)
-        pass_input.send_keys(password)
+        user_input.send_keys(self.username)
+        pass_input.send_keys(self.password)
         if driver.find_element_by_id('loginbutton'):
             send_login = driver.find_element_by_id('loginbutton')
 
@@ -164,5 +163,11 @@ class TicketSwapMe:
 if __name__ == "__main__":
     ROOT = tk.Tk()
     ROOT.withdraw()
+    username = simpledialog.askstring(title="Username",
+                                      prompt="Please enter your instagram username: ")
+    password = simpledialog.askstring(title="Password",
+                                      prompt="Please enter your password: ",
+                                      show="*")
     t = TicketSwapMe()
+    t.login()
     t.start()
