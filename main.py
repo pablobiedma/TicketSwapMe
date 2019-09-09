@@ -23,18 +23,18 @@ class TicketSwapMe:
 
     def login(self):
         username = simpledialog.askstring(title="Username",
-                                          prompt="Please enter your instagram username: ")
+                                          prompt="Please enter your facebook username: ")
         password = simpledialog.askstring(title="Password",
                                           prompt="Please enter your password: ",
                                           show="*")
         driver = wd.Firefox()
         driver.get(HOST)
-        login_button = driver.find_element_by_class_name(
-            "css-1ia6hlk e1oaf4hi6")  # make sure that class name is still the same
+        login_button = driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div/nav/ul/li[4]/button") # make sure that class name is still the same
         login_button.click()
         time.sleep(3)
-        facebook_button = driver.find_element_by_class_name(
-            "css-xl214v e1suhhn80")  # make sure that class name is still the same
+        facebook_button = driver.find_elements_by_xpath(
+            "//*[contains(text(), 'Ga verder met Facebook')]"
+        )[1]  # make sure that class name is still the same
         facebook_button.click()
         time.sleep(1)
 
