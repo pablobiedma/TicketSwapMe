@@ -8,3 +8,5 @@ Once the desired concert is found, the bot continuously monitors the TicketSwap 
 When the bot detects available tickets for the desired concert, it initiates the purchasing process automatically. It interacts with TicketSwap's web application to simulate user actions, such as selecting the desired number of tickets and initiating the checkout process. The bot optimizes the speed and accuracy of these interactions, aiming to complete the purchase before other potential buyers.
 
 TicketSwapMe exemplifies the use of automation and technical proficiency to provide users with an advantage in securing highly coveted concert tickets. Its ability to expedite the ticket purchasing process and its advanced features make it an invaluable tool for users seeking to be among the first to buy tickets for sold-out concerts on TicketSwap.
+
+To run the bot, simply enter your facebook credentials and the link to the event you wish to attend. Good luck!
